@@ -1,0 +1,27 @@
+#!/usr/bin/python3
+
+from sys import argv
+from math import isqrt
+
+def factor(num):
+    if num < 2:
+        return [(num, 1)]
+
+    factors = []
+
+    # Handle 2 separately to factor out all the 2s
+    while num % 2 == 0:
+        factors.append((2, num // 2))
+        num //= 2
+
+    # Continue factoring with odd numbers starting from 3
+    for i in range(3, isqrt(num) + 1, 2):
+        while num % i == 0:
+            factors.append((i, num // i))
+            num //= i
+
+    # If num is still greater than 1, it's a prime factor
+    if num > 1:
+        factors.append((num, 1))
+
+    return factors
